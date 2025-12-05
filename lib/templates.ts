@@ -8,6 +8,7 @@ export const templates: Template[] = [
     type: "web",
     imagePath: "/templates/web-browser-light.png",
     slot: { x: 0, y: 72, width: 1920, height: 1008 },
+    borderRadius: 0, // Web tarayıcı - köşe yok
   },
   {
     id: "web-browser-dark",
@@ -15,6 +16,7 @@ export const templates: Template[] = [
     type: "web",
     imagePath: "/templates/web-browser-dark.png",
     slot: { x: 0, y: 72, width: 1920, height: 1008 },
+    borderRadius: 0, // Web tarayıcı - köşe yok
   },
   // Mobile Templates
   {
@@ -23,6 +25,7 @@ export const templates: Template[] = [
     type: "mobile",
     imagePath: "/templates/mobile-iphone.png",
     slot: { x: 26, y: 26, width: 390, height: 844 },
+    borderRadius: 47, // iPhone köşe yuvarlağı
   },
   {
     id: "mobile-android",
@@ -30,6 +33,7 @@ export const templates: Template[] = [
     type: "mobile",
     imagePath: "/templates/mobile-android.png",
     slot: { x: 4, y: 4, width: 424, height: 915 },
+    borderRadius: 36, // Android köşe yuvarlağı
   },
 ];
 

@@ -38,11 +38,20 @@ export async function composeMockup(
 
   // 4. Kullanıcı görselini slot'a yerleştir (önce bu çizilir, template üstte kalır)
   const { x, y, width, height } = template.slot;
+  const borderRadius = template.borderRadius ?? 0;
 
-  // Slot alanını clip et (taşmaları önle)
+  // Slot alanını clip et (taşmaları önle, rounded corners ile)
   ctx.save();
   ctx.beginPath();
-  ctx.rect(x, y, width, height);
+
+  if (borderRadius > 0) {
+    // Rounded rectangle clip
+    roundedRect(ctx, x, y, width, height, borderRadius);
+  } else {
+    // Normal rectangle clip
+    ctx.rect(x, y, width, height);
+  }
+
   ctx.clip();
 
   // Kullanıcı görselini slot'a sığdır (cover modunda tam doldurur)
@@ -135,4 +144,30 @@ function fitImageToSlot(
   }
 
   return { width, height, offsetX, offsetY };
+}
+
+/**
+ * Canvas'a rounded rectangle path çizer
+ */
+function roundedRect(
+  ctx: CanvasRenderingContext2D,
+  x: number,
+  y: number,
+  width: number,
+  height: number,
+  radius: number
+): void {
+  // Radius'un boyutlardan büyük olmamasını sağla
+  const r = Math.min(radius, width / 2, height / 2);
+
+  ctx.moveTo(x + r, y);
+  ctx.lineTo(x + width - r, y);
+  ctx.quadraticCurveTo(x + width, y, x + width, y + r);
+  ctx.lineTo(x + width, y + height - r);
+  ctx.quadraticCurveTo(x + width, y + height, x + width - r, y + height);
+  ctx.lineTo(x + r, y + height);
+  ctx.quadraticCurveTo(x, y + height, x, y + height - r);
+  ctx.lineTo(x, y + r);
+  ctx.quadraticCurveTo(x, y, x + r, y);
+  ctx.closePath();
 }

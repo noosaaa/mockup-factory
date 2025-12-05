@@ -16,6 +16,7 @@ export interface Template {
   type: MockupType; // "web" veya "mobile"
   imagePath: string; // "/templates/web-browser-light.png"
   slot: Slot; // Görsel yerleştirme koordinatları
+  borderRadius?: number; // Köşe yuvarlama (px), varsayılan: 0
   thumbnail?: string; // Opsiyonel küçük önizleme
 }
 
