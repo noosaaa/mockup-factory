@@ -7,6 +7,7 @@ import Image from "next/image";
 interface StepUploadImageProps {
   uploadedImageUrl: string | null;
   onUploadImage: (file: File) => void;
+  onError?: (message: string) => void;
 }
 
 const ACCEPTED_TYPES = ["image/png", "image/jpeg", "image/jpg", "image/webp"];
@@ -15,6 +16,7 @@ const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
 export default function StepUploadImage({
   uploadedImageUrl,
   onUploadImage,
+  onError,
 }: StepUploadImageProps) {
   const [isDragging, setIsDragging] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -23,12 +25,16 @@ export default function StepUploadImage({
     setError(null);
 
     if (!ACCEPTED_TYPES.includes(file.type)) {
-      setError("Please upload a PNG, JPG, or WEBP image");
+      const errorMsg = "Please upload a PNG, JPG, or WEBP image";
+      setError(errorMsg);
+      onError?.(errorMsg);
       return false;
     }
 
     if (file.size > MAX_FILE_SIZE) {
-      setError("File size must be less than 10MB");
+      const errorMsg = "File size must be less than 10MB";
+      setError(errorMsg);
+      onError?.(errorMsg);
       return false;
     }
 
@@ -156,7 +162,7 @@ export default function StepUploadImage({
       {/* Error Message */}
       {error && (
         <div className="flex items-center gap-2 p-3 rounded-lg bg-red-50 text-red-600">
-          <Icon icon="mdi:alert-circle" className="w-5 h-5 flex-shrink-0" />
+          <Icon icon="mdi:alert-circle" className="w-5 h-5 shrink-0" />
           <span className="text-sm">{error}</span>
         </div>
       )}
@@ -165,7 +171,7 @@ export default function StepUploadImage({
       <div className="flex items-start gap-2 p-3 rounded-lg bg-gray-50 text-gray-600">
         <Icon
           icon="mdi:shield-check"
-          className="w-5 h-5 flex-shrink-0 text-green-500"
+          className="w-5 h-5 shrink-0 text-green-500"
         />
         <p className="text-xs">
           <strong>Privacy First:</strong> Your image never leaves your browser.

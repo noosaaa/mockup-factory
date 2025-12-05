@@ -48,7 +48,7 @@ function TemplateCard({ template }: { template: Template }) {
   return (
     <div className="group bg-white rounded-xl border border-gray-200 overflow-hidden hover:border-sky-300 transition-all">
       {/* Template Preview */}
-      <div className="aspect-[4/3] bg-gray-100 relative overflow-hidden">
+      <div className="aspect-4/3 bg-gray-100 relative overflow-hidden">
         <Image
           src={template.imagePath}
           alt={template.label}

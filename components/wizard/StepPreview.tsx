@@ -12,6 +12,7 @@ interface StepPreviewProps {
   userImageUrl: string;
   resultImageUrl: string | null;
   onResultReady: (url: string) => void;
+  onError?: (message: string) => void;
   onTryAnother: () => void;
   onReset: () => void;
 }
@@ -21,6 +22,7 @@ export default function StepPreview({
   userImageUrl,
   resultImageUrl,
   onResultReady,
+  onError,
   onTryAnother,
   onReset,
 }: StepPreviewProps) {
@@ -46,7 +48,9 @@ export default function StepPreview({
       onResultReady(result);
     } catch (err) {
       console.error("Mockup generation failed:", err);
-      setError("Failed to generate mockup. Please try again.");
+      const errorMsg = "Failed to generate mockup. Please try again.";
+      setError(errorMsg);
+      onError?.(errorMsg);
     } finally {
       setIsProcessing(false);
     }

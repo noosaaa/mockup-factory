@@ -14,3 +14,4 @@ export {
 
 // Hooks
 export { useWizard } from "./hooks/useWizard";
+export { useToast } from "./hooks/useToast";

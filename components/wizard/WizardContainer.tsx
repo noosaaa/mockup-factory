@@ -1,7 +1,10 @@
 "use client";
 
+import { useEffect, useCallback } from "react";
 import { Icon } from "@iconify/react";
 import { useWizard } from "@/lib/hooks/useWizard";
+import { useToast } from "@/lib/hooks/useToast";
+import { ToastContainer } from "@/components/shared/Toast";
 import Stepper from "./Stepper";
 import StepSelectType from "./StepSelectType";
 import StepUploadImage from "./StepUploadImage";
@@ -20,6 +23,8 @@ export default function WizardContainer() {
     setResultUrl,
     reset,
   } = useWizard();
+
+  const toast = useToast();
 
   const {
     currentStep,
@@ -45,9 +50,55 @@ export default function WizardContainer() {
     }
   };
 
+  // Keyboard navigation
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+      // Enter ile ileri git (eğer mümkünse)
+      if (e.key === "Enter" && canProceed() && currentStep < 4) {
+        e.preventDefault();
+        nextStep();
+      }
+
+      // Escape ile geri git
+      if (e.key === "Escape" && currentStep > 1) {
+        e.preventDefault();
+        prevStep();
+      }
+
+      // Arrow keys ile navigasyon (1-3 adımlarda)
+      if (e.key === "ArrowRight" && canProceed() && currentStep < 4) {
+        e.preventDefault();
+        nextStep();
+      }
+
+      if (e.key === "ArrowLeft" && currentStep > 1) {
+        e.preventDefault();
+        prevStep();
+      }
+    },
+    [currentStep, canProceed, nextStep, prevStep]
+  );
+
+  useEffect(() => {
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [handleKeyDown]);
+
   // Geri dönüş handler
   const handleTryAnotherTemplate = () => {
     goToStep(3);
+  };
+
+  // Toast ile görsel yükleme
+  const handleUploadImage = (file: File) => {
+    uploadImage(file);
+    toast.success("Image uploaded successfully!");
+  };
+
+  // Toast ile reset
+  const handleReset = () => {
+    reset();
+    toast.info("Wizard reset. Start fresh!");
   };
 
   return (
@@ -71,7 +122,8 @@ export default function WizardContainer() {
         {currentStep === 2 && (
           <StepUploadImage
             uploadedImageUrl={uploadedImageUrl}
-            onUploadImage={uploadImage}
+            onUploadImage={handleUploadImage}
+            onError={(message) => toast.error(message)}
           />
         )}
 
@@ -88,12 +140,19 @@ export default function WizardContainer() {
             template={selectedTemplate}
             userImageUrl={uploadedImageUrl}
             resultImageUrl={resultImageUrl}
-            onResultReady={setResultUrl}
+            onResultReady={(url) => {
+              setResultUrl(url);
+              toast.success("Mockup generated successfully!");
+            }}
+            onError={(message) => toast.error(message)}
             onTryAnother={handleTryAnotherTemplate}
-            onReset={reset}
+            onReset={handleReset}
           />
         )}
       </div>
+
+      {/* Toast Container */}
+      <ToastContainer toasts={toast.toasts} onRemove={toast.removeToast} />
 
       {/* Navigation Buttons */}
       {currentStep < 4 && (
