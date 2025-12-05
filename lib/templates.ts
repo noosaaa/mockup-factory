@@ -29,7 +29,7 @@ export const templates: Template[] = [
     label: "Android Mockup",
     type: "mobile",
     imagePath: "/templates/mobile-android.png",
-    slot: { x: 18, y: 18, width: 412, height: 915 },
+    slot: { x: 4, y: 4, width: 424, height: 915 },
   },
 ];
 

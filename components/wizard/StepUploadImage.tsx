@@ -3,9 +3,27 @@
 import { useCallback, useState } from "react";
 import { Icon } from "@iconify/react";
 import Image from "next/image";
+import { MockupType } from "@/lib/types";
+
+// Önerilen çözünürlükler (template slot boyutlarına göre)
+const RECOMMENDED_RESOLUTIONS = {
+  web: {
+    width: 1920,
+    height: 1008, // slot height
+    label: "1920 × 1008 px",
+    ratio: "≈ 1.9:1",
+  },
+  mobile: {
+    width: 390,
+    height: 844, // iPhone slot
+    label: "390 × 844 px (iPhone) veya 412 × 915 px (Android)",
+    ratio: "≈ 9:19",
+  },
+};
 
 interface StepUploadImageProps {
   uploadedImageUrl: string | null;
+  selectedType: MockupType | null;
   onUploadImage: (file: File) => void;
   onError?: (message: string) => void;
 }
@@ -15,11 +33,21 @@ const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
 
 export default function StepUploadImage({
   uploadedImageUrl,
+  selectedType,
   onUploadImage,
   onError,
 }: StepUploadImageProps) {
   const [isDragging, setIsDragging] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [imageDimensions, setImageDimensions] = useState<{
+    width: number;
+    height: number;
+  } | null>(null);
+
+  // Seçilen tipe göre önerilen çözünürlük
+  const recommended = selectedType
+    ? RECOMMENDED_RESOLUTIONS[selectedType]
+    : null;
 
   const validateFile = (file: File): boolean => {
     setError(null);
@@ -44,6 +72,14 @@ export default function StepUploadImage({
   const handleFile = useCallback(
     (file: File) => {
       if (validateFile(file)) {
+        // Görsel boyutlarını al
+        const img = new window.Image();
+        img.onload = () => {
+          setImageDimensions({ width: img.width, height: img.height });
+          URL.revokeObjectURL(img.src);
+        };
+        img.src = URL.createObjectURL(file);
+
         onUploadImage(file);
       }
     },
@@ -92,6 +128,31 @@ export default function StepUploadImage({
         </p>
       </div>
 
+      {/* Önerilen Çözünürlük */}
+      {recommended && (
+        <div className="flex items-start gap-3 p-4 rounded-lg bg-sky-50 border border-sky-200">
+          <Icon
+            icon="mdi:lightbulb-outline"
+            className="w-5 h-5 text-sky-600 shrink-0 mt-0.5"
+          />
+          <div className="text-sm">
+            <p className="font-medium text-sky-800">
+              Recommended Resolution for{" "}
+              {selectedType === "web" ? "Web" : "Mobile"} Mockups:
+            </p>
+            <p className="text-sky-700 mt-1">
+              <span className="font-mono bg-sky-100 px-1.5 py-0.5 rounded">
+                {recommended.label}
+              </span>
+            </p>
+            <p className="text-sky-600 text-xs mt-1">
+              Aspect Ratio: {recommended.ratio} • Images will be scaled to fit
+              the template slot
+            </p>
+          </div>
+        </div>
+      )}
+
       {/* Upload Area */}
       <div
         onDrop={handleDrop}
@@ -127,9 +188,16 @@ export default function StepUploadImage({
                 className="object-contain"
               />
             </div>
-            <div className="flex items-center justify-center gap-2 text-sky-600">
-              <Icon icon="mdi:check-circle" className="w-5 h-5" />
-              <span className="text-sm font-medium">Image uploaded</span>
+            <div className="flex flex-col items-center gap-2">
+              <div className="flex items-center gap-2 text-sky-600">
+                <Icon icon="mdi:check-circle" className="w-5 h-5" />
+                <span className="text-sm font-medium">Image uploaded</span>
+              </div>
+              {imageDimensions && (
+                <span className="text-xs text-gray-500 font-mono bg-gray-100 px-2 py-1 rounded">
+                  {imageDimensions.width} × {imageDimensions.height} px
+                </span>
+              )}
             </div>
             <p className="text-xs text-gray-500">
               Click or drag to replace the image

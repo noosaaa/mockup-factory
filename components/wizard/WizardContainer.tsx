@@ -122,6 +122,7 @@ export default function WizardContainer() {
         {currentStep === 2 && (
           <StepUploadImage
             uploadedImageUrl={uploadedImageUrl}
+            selectedType={selectedType}
             onUploadImage={handleUploadImage}
             onError={(message) => toast.error(message)}
           />

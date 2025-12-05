@@ -1,8 +1,11 @@
 import { Template } from "./types";
 
+export type FitMode = "cover" | "contain";
+
 interface ComposeMockupOptions {
   template: Template;
   userImageUrl: string;
+  fitMode?: FitMode; // Varsayılan: "cover"
 }
 
 /**
@@ -15,7 +18,7 @@ interface ComposeMockupOptions {
 export async function composeMockup(
   options: ComposeMockupOptions
 ): Promise<string> {
-  const { template, userImageUrl } = options;
+  const { template, userImageUrl, fitMode = "cover" } = options;
 
   // 1. Template görselini yükle
   const templateImg = await loadImage(template.imagePath);
@@ -36,8 +39,20 @@ export async function composeMockup(
   // 4. Kullanıcı görselini slot'a yerleştir (önce bu çizilir, template üstte kalır)
   const { x, y, width, height } = template.slot;
 
-  // Kullanıcı görselini slot'a sığdır (aspect ratio koruyarak)
-  const fitted = fitImageToSlot(userImg.width, userImg.height, width, height);
+  // Slot alanını clip et (taşmaları önle)
+  ctx.save();
+  ctx.beginPath();
+  ctx.rect(x, y, width, height);
+  ctx.clip();
+
+  // Kullanıcı görselini slot'a sığdır (cover modunda tam doldurur)
+  const fitted = fitImageToSlot(
+    userImg.width,
+    userImg.height,
+    width,
+    height,
+    fitMode
+  );
 
   ctx.drawImage(
     userImg,
@@ -46,6 +61,8 @@ export async function composeMockup(
     fitted.width,
     fitted.height
   );
+
+  ctx.restore();
 
   // 5. Template'i çiz (üstte, transparent alanlar kullanıcı görselini gösterir)
   ctx.drawImage(templateImg, 0, 0);
@@ -68,13 +85,16 @@ function loadImage(src: string): Promise<HTMLImageElement> {
 }
 
 /**
- * Görseli slot'a sığdır (aspect ratio koruyarak, ortalayarak)
+ * Görseli slot'a sığdır
+ * - cover: Slot tamamen doldurulur, taşan kısımlar kesilir (önerilen)
+ * - contain: Görsel tamamen görünür, boşluk kalabilir
  */
 function fitImageToSlot(
   imgWidth: number,
   imgHeight: number,
   slotWidth: number,
-  slotHeight: number
+  slotHeight: number,
+  mode: FitMode = "cover"
 ): { width: number; height: number; offsetX: number; offsetY: number } {
   const imgRatio = imgWidth / imgHeight;
   const slotRatio = slotWidth / slotHeight;
@@ -84,18 +104,34 @@ function fitImageToSlot(
   let offsetX: number;
   let offsetY: number;
 
-  if (imgRatio > slotRatio) {
-    // Görsel daha geniş, genişliğe göre sığdır
-    width = slotWidth;
-    height = slotWidth / imgRatio;
-    offsetX = 0;
-    offsetY = (slotHeight - height) / 2;
+  if (mode === "cover") {
+    // Cover: Slot'u tamamen doldur, taşanları kes
+    if (imgRatio > slotRatio) {
+      // Görsel daha geniş, yüksekliğe göre ölçekle
+      height = slotHeight;
+      width = slotHeight * imgRatio;
+      offsetX = (slotWidth - width) / 2; // Yatayda ortala (negatif olabilir)
+      offsetY = 0;
+    } else {
+      // Görsel daha uzun, genişliğe göre ölçekle
+      width = slotWidth;
+      height = slotWidth / imgRatio;
+      offsetX = 0;
+      offsetY = (slotHeight - height) / 2; // Dikeyde ortala (negatif olabilir)
+    }
   } else {
-    // Görsel daha uzun, yüksekliğe göre sığdır
-    height = slotHeight;
-    width = slotHeight * imgRatio;
-    offsetX = (slotWidth - width) / 2;
-    offsetY = 0;
+    // Contain: Görselin tamamı görünsün, boşluk kalabilir
+    if (imgRatio > slotRatio) {
+      width = slotWidth;
+      height = slotWidth / imgRatio;
+      offsetX = 0;
+      offsetY = (slotHeight - height) / 2;
+    } else {
+      height = slotHeight;
+      width = slotHeight * imgRatio;
+      offsetX = (slotWidth - width) / 2;
+      offsetY = 0;
+    }
   }
 
   return { width, height, offsetX, offsetY };
