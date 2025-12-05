@@ -16,7 +16,7 @@ const Footer = () => {
                 alt="Mockup Factory Logo"
                 width={32}
                 height={32}
-                className="w-8 h-8"
+                className="w-8 h-8 rounded-sm"
               />
               <span className="font-semibold text-gray-900 text-lg">
                 Mockup Factory
@@ -28,7 +28,7 @@ const Footer = () => {
             </p>
             <div className="flex items-center gap-4">
               <Link
-                href="https://github.com"
+                href="https://github.com/poyrazavsever/mockup-factory"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-500 hover:text-sky-600 transition-colors"
@@ -36,7 +36,7 @@ const Footer = () => {
                 <Icon icon="mdi:github" className="w-6 h-6" />
               </Link>
               <Link
-                href="https://buymeacoffee.com"
+                href="https://buymeacoffee.com/poyrazavsever"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-500 hover:text-sky-600 transition-colors"
@@ -48,30 +48,24 @@ const Footer = () => {
 
           {/* Documentation Links */}
           <div>
-            <h3 className="font-semibold text-gray-900 mb-4">Documentation</h3>
+            <h3 className="font-semibold text-gray-900 mb-4">Resources</h3>
             <ul className="space-y-3">
               <li>
                 <Link
-                  href="/docs/getting-started"
+                  href="https://www.poyrazavsever.com/blog"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-gray-600 hover:text-sky-600 transition-colors text-sm"
                 >
-                  Getting Started
+                  Blog
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/docs/installation"
+                  href="/templates"
                   className="text-gray-600 hover:text-sky-600 transition-colors text-sm"
                 >
-                  Installation
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/docs/examples"
-                  className="text-gray-600 hover:text-sky-600 transition-colors text-sm"
-                >
-                  Examples
+                  Templates
                 </Link>
               </li>
             </ul>
@@ -83,7 +77,7 @@ const Footer = () => {
             <ul className="space-y-3">
               <li>
                 <Link
-                  href="/templates/web"
+                  href="/templates?type=web"
                   className="text-gray-600 hover:text-sky-600 transition-colors text-sm"
                 >
                   Web Mockups
@@ -91,7 +85,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  href="/templates/mobile"
+                  href="/templates?type=mobile"
                   className="text-gray-600 hover:text-sky-600 transition-colors text-sm"
                 >
                   Mobile Mockups
@@ -99,7 +93,9 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  href="/templates/contribute"
+                  href="https://github.com/poyrazavsever/mockup-factory"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-gray-600 hover:text-sky-600 transition-colors text-sm"
                 >
                   Contribute Template
@@ -118,7 +114,7 @@ const Footer = () => {
             Created with{" "}
             <Icon icon="mdi:heart" className="w-4 h-4 text-sky-500" /> by{" "}
             <Link
-              href="https://github.com"
+              href="https://www.poyrazavsever.com"
               target="_blank"
               rel="noopener noreferrer"
               className="text-sky-600 hover:text-sky-700 transition-colors"
