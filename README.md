@@ -34,7 +34,7 @@
 
 ## 🎬 Demo
 
-Visit the live demo: **[mockup-factory.vercel.app](https://mockup-factory.vercel.app)** _(coming soon)_
+Visit the live demo: **[https://mockup-factory-mu.vercel.app/](https://mockup-factory-mu.vercel.app/)**
 
 ### Quick Preview
 
