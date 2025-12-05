@@ -23,11 +23,11 @@ Tarayıcıda çalışan, kullanıcıdan alınan görselleri hazır mockup PNG'le
 
 ### Stack (Önerilen)
 
-| Teknoloji | Kullanım Amacı |
-|-----------|----------------|
-| **Next.js** | App Router, TypeScript |
-| **Tailwind CSS** | Hızlı UI için |
-| **Canvas API** | Tarayıcıda birleştirme işlemi için |
+| Teknoloji        | Kullanım Amacı                     |
+| ---------------- | ---------------------------------- |
+| **Next.js**      | App Router, TypeScript             |
+| **Tailwind CSS** | Hızlı UI için                      |
+| **Canvas API**   | Tarayıcıda birleştirme işlemi için |
 
 ---
 
@@ -123,24 +123,24 @@ src/
 
 Her mockup için temel bilgiler:
 
-| Alan | Açıklama | Örnek |
-|------|----------|-------|
-| `id` | Benzersiz kimlik | `"web-desktop-1"` |
-| `label` | Kullanıcıya gösterilecek isim | `"Desktop Browser Mockup"` |
-| `type` | Mockup tipi (Adım 1'de seçilen tipe göre filtrelenecek) | `"web"` veya `"mobile"` |
-| `imagePath` | Public yolu | `"/templates/web-desktop-1.png"` |
-| `slot` | Kullanıcı görselinin oturacağı alan | _(aşağıya bakınız)_ |
+| Alan        | Açıklama                                                | Örnek                            |
+| ----------- | ------------------------------------------------------- | -------------------------------- |
+| `id`        | Benzersiz kimlik                                        | `"web-desktop-1"`                |
+| `label`     | Kullanıcıya gösterilecek isim                           | `"Desktop Browser Mockup"`       |
+| `type`      | Mockup tipi (Adım 1'de seçilen tipe göre filtrelenecek) | `"web"` veya `"mobile"`          |
+| `imagePath` | Public yolu                                             | `"/templates/web-desktop-1.png"` |
+| `slot`      | Kullanıcı görselinin oturacağı alan                     | _(aşağıya bakınız)_              |
 
 ### Slot Tanımı
 
-| Parametre | Açıklama |
-|-----------|----------|
-| `x` | Template üzerinde soldan uzaklık (piksel) |
-| `y` | Template üzerinde yukarıdan uzaklık |
-| `width` | Ekran alanının genişliği |
-| `height` | Ekran alanının yüksekliği |
+| Parametre | Açıklama                                  |
+| --------- | ----------------------------------------- |
+| `x`       | Template üzerinde soldan uzaklık (piksel) |
+| `y`       | Template üzerinde yukarıdan uzaklık       |
+| `width`   | Ekran alanının genişliği                  |
+| `height`  | Ekran alanının yüksekliği                 |
 
-Bunu bir `json/ts config` gibi düşünebilirsin. UI için bu sadece *"kart oluştururken thumbnail'ini gösterelim, tıklanırsa bu template'i kullan"* bilgisidir.
+Bunu bir `json/ts config` gibi düşünebilirsin. UI için bu sadece _"kart oluştururken thumbnail'ini gösterelim, tıklanırsa bu template'i kullan"_ bilgisidir.
 
 ---
 
@@ -256,7 +256,7 @@ Bu kısım projeyi "tek akşamlık oyuncak" olmaktan çıkarıp küçük bir ür
 ### Güvenlik / Gizlilik
 
 - Görseller server'a gönderilmediği için GDPR/kişisel veri tarafı çok daha rahat.
-- README'de *"All processing happens in your browser"* gibi bir not ekleyebilirsin.
+- README'de _"All processing happens in your browser"_ gibi bir not ekleyebilirsin.
 
 ### Responsive Tasarım
 
