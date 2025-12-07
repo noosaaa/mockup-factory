@@ -53,7 +53,7 @@ function TemplateCard({ template }: { template: Template }) {
           src={template.imagePath}
           alt={template.label}
           fill
-          className="object-cover group-hover:scale-105 transition-transform duration-300"
+          className="object-contain group-hover:scale-105 transition-transform duration-300"
           onError={(e) => {
             const target = e.target as HTMLImageElement;
             target.style.display = "none";
