@@ -192,6 +192,76 @@ For best results, use images that match the template slot dimensions:
 - **Web Mockups:** `1920 × 1008 px` (aspect ratio ≈ 1.9:1)
 - **Mobile Mockups:** `390 × 844 px` (iPhone) or `424 × 915 px` (Android)
 
+### How to Calculate Template Dimensions
+
+When creating new templates, follow these guidelines to calculate accurate measurements:
+
+#### 🖥️ **Web Templates (Browser Mockups)**
+
+1. Open your mockup design in Photoshop/Figma
+2. Measure the browser header bar height → **`y` value**
+3. Measure distance from left edge to content area → **`x` value**
+4. Measure content area dimensions → **`width` and `height` values**
+5. Web templates typically have `borderRadius: 0`
+
+**Common Web Dimensions:**
+
+- Full HD: `1920 × 1080` (slot: `1920 × 1008` after 72px header)
+- MacBook Pro 14": `3024 × 1964`
+- iMac 27": `5120 × 2880`
+
+#### 📱 **Mobile Templates (Phone Mockups)**
+
+1. Open your mockup design in Photoshop/Figma
+2. Measure device frame thickness → **`x` and `y` values** (usually equal)
+3. Measure screen area dimensions → **`width` and `height` values**
+4. Measure corner radius of screen → **`borderRadius` value**
+
+**Common Mobile Dimensions:**
+
+**iPhone:**
+
+- iPhone 14 Pro: `390 × 844` (frame: ~26px, radius: ~47px)
+- iPhone 14 Pro Max: `430 × 932` (frame: ~26px, radius: ~55px)
+- iPhone SE: `375 × 667` (frame: ~20px, radius: ~10px)
+
+**Android:**
+
+- Pixel 7: `412 × 915` (frame: ~4px, radius: ~36px)
+- Samsung S23: `360 × 780` (frame: ~8px, radius: ~40px)
+- OnePlus: `412 × 892` (frame: ~6px, radius: ~32px)
+
+#### 🛠️ **Measurement Tools**
+
+**Photoshop:**
+
+- Use Ruler Tool (I) to measure distances
+- Check Info panel for X, Y, W, H values
+- Test corner radius with Rounded Rectangle Tool
+
+**Figma:**
+
+- Enable Measurement mode (Option/Alt + hover)
+- Select frame to see W, H in Design panel
+- Inspect border radius property directly
+
+#### ✅ **Verification Checklist**
+
+1. Upload a test image (solid color rectangle)
+2. Generate mockup and verify:
+   - ❌ Content overflows frame? → Decrease width/height
+   - ❌ Content doesn't fill screen? → Increase width/height
+   - ❌ Content off-center? → Adjust x/y values
+   - ❌ Corners appear square? → Increase borderRadius
+   - ✅ Perfect fit? You're done!
+
+**Pro Tips:**
+
+- Always work at 1:1 scale, never scale mockups
+- Frame thickness is usually uniform (same x and y)
+- Test with multiple image aspect ratios
+- Document your measurements for future reference
+
 ---
 
 ## 🤝 Contributing
