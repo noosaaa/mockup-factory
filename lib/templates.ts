@@ -35,6 +35,19 @@ export const templates: Template[] = [
     slot: { x: 4, y: 4, width: 424, height: 915 },
     borderRadius: 36, // Android köşe yuvarlağı
   },
+  {
+    id: "web-imac-silver",
+    label: "iMac Silver",
+    type: "web",
+    imagePath: "/templates/web-imac-silver.png",
+    slot: {
+      x: 28, // ← ÖLÇ: Sol çerçeve
+      y: 32, // ← ÖLÇ: Üst çerçeve
+      width: 1620, // ← ÖLÇ: 5K iMac genişliği
+      height: 1025, // ← ÖLÇ: 5K iMac yüksekliği
+    },
+    borderRadius: 32, // ← ÖLÇ: Köşe yuvarlama
+  },
 ];
 
 // Helper: Tipe göre template'leri filtrele
