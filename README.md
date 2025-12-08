@@ -9,14 +9,14 @@
 </p>
 
 <p align="center">
-  <a href="#features">Features</a> •
-  <a href="#demo">Demo</a> •
-  <a href="#getting-started">Getting Started</a> •
-  <a href="#how-it-works">How It Works</a> •
-  <a href="#templates">Templates</a> •
-  <a href="#adding-templates">Adding Templates</a> •
-  <a href="#contributing">Contributing</a> •
-  <a href="#license">License</a>
+  <a href="#-features">Features</a> •
+  <a href="#-demo">Demo</a> •
+  <a href="#-getting-started">Getting Started</a> •
+  <a href="#-how-it-works">How It Works</a> •
+  <a href="#-templates">Templates</a> •
+  <a href="#-adding-templates">Adding Templates</a> •
+  <a href="#-contributing">Contributing</a> •
+  <a href="#-license">License</a>
 </p>
 
 ---
