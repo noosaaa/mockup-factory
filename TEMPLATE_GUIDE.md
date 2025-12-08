@@ -38,18 +38,18 @@ Every template needs the following properties:
 
 ```typescript
 interface Template {
-  id: string;           // Unique identifier (e.g., "web-imac-silver")
-  label: string;        // Display name (e.g., "iMac Silver")
-  type: MockupType;     // "web" or "mobile"
-  imagePath: string;    // Path to PNG file (e.g., "/templates/web-imac-silver.png")
-  slot: Slot;          // Content placement coordinates
+  id: string; // Unique identifier (e.g., "web-imac-silver")
+  label: string; // Display name (e.g., "iMac Silver")
+  type: MockupType; // "web" or "mobile"
+  imagePath: string; // Path to PNG file (e.g., "/templates/web-imac-silver.png")
+  slot: Slot; // Content placement coordinates
   borderRadius?: number; // Corner radius for rounded screens (optional)
 }
 
 interface Slot {
-  x: number;      // Distance from left edge of PNG to content area (px)
-  y: number;      // Distance from top edge of PNG to content area (px)
-  width: number;  // Width of content area (px)
+  x: number; // Distance from left edge of PNG to content area (px)
+  y: number; // Distance from top edge of PNG to content area (px)
+  width: number; // Width of content area (px)
   height: number; // Height of content area (px)
 }
 ```
@@ -85,12 +85,14 @@ Full PNG Canvas (e.g., 1200 × 800 px)
 #### Design Requirements
 
 ✅ **Must Have:**
+
 - High resolution (minimum 2000px for web, 800px for mobile)
 - Clean, professional device frame/border
 - Clearly defined content/screen area
 - Transparent background (PNG format)
 
 ❌ **Avoid:**
+
 - Low resolution or pixelated images
 - Pre-filled content in screen area
 - JPEG format (no transparency support)
@@ -99,12 +101,14 @@ Full PNG Canvas (e.g., 1200 × 800 px)
 #### Design Tips
 
 **For Web Templates (Browsers/Monitors):**
+
 - Include realistic browser chrome (address bar, tabs)
 - Leave screen area completely empty or white
 - Consider adding subtle shadows for depth
 - Typical size: 2000-5000px width
 
 **For Mobile Templates (Phones/Tablets):**
+
 - Include device bezels and physical buttons
 - Round screen corners accurately
 - Add realistic device shadows
@@ -143,6 +147,7 @@ Step 7: Note the radius that matches your screen corners
 ```
 
 **Photoshop Shortcuts:**
+
 - `I` - Ruler Tool
 - `U` - Rectangle Tool
 - `F8` - Toggle Info panel
@@ -167,6 +172,7 @@ Step 7: Check Corner Radius in Design panel
 ```
 
 **Figma Shortcuts:**
+
 - `R` - Rectangle Tool
 - `Option/Alt + hover` - Quick measure mode
 - `Ctrl/Cmd + D` - Duplicate for testing
@@ -193,6 +199,7 @@ Step 4: Calculate:
 #### Export Settings
 
 **Photoshop:**
+
 ```
 File > Export > Export As...
 - Format: PNG
@@ -203,6 +210,7 @@ File > Export > Export As...
 ```
 
 **Figma:**
+
 ```
 Select mockup frame > Export
 - Format: PNG
@@ -215,6 +223,7 @@ Select mockup frame > Export
 Use this format: `{type}-{device}-{variant}.png`
 
 **Examples:**
+
 - `web-browser-light.png`
 - `web-browser-dark.png`
 - `web-imac-silver.png`
@@ -226,6 +235,7 @@ Use this format: `{type}-{device}-{variant}.png`
 #### File Placement
 
 Save the PNG file to:
+
 ```
 mockup-factory/
 └── public/
@@ -246,20 +256,20 @@ Open `lib/templates.ts` and add your template configuration:
 
 export const templates: Template[] = [
   // ... existing templates ...
-  
+
   // Your new template
   {
-    id: "web-imac-silver",              // Unique ID (kebab-case)
-    label: "iMac Silver",                // Display name
-    type: "web",                         // "web" or "mobile"
-    imagePath: "/templates/web-imac-silver.png",  // File path
-    slot: { 
-      x: 145,        // ← Your measured X offset
-      y: 135,        // ← Your measured Y offset
-      width: 2560,   // ← Your measured width
-      height: 1440   // ← Your measured height
+    id: "web-imac-silver", // Unique ID (kebab-case)
+    label: "iMac Silver", // Display name
+    type: "web", // "web" or "mobile"
+    imagePath: "/templates/web-imac-silver.png", // File path
+    slot: {
+      x: 145, // ← Your measured X offset
+      y: 135, // ← Your measured Y offset
+      width: 2560, // ← Your measured width
+      height: 1440, // ← Your measured height
     },
-    borderRadius: 8,  // ← Corner radius (optional, 0 for square)
+    borderRadius: 8, // ← Corner radius (optional, 0 for square)
   },
 ];
 ```
@@ -267,30 +277,36 @@ export const templates: Template[] = [
 #### Configuration Checklist
 
 ✅ **ID:**
+
 - [ ] Unique (not used by another template)
 - [ ] Lowercase with hyphens (kebab-case)
 - [ ] Descriptive (includes device name)
 
 ✅ **Label:**
+
 - [ ] User-friendly name
 - [ ] Proper capitalization
 - [ ] Concise (2-4 words)
 
 ✅ **Type:**
+
 - [ ] Set to `"web"` for desktop/browser mockups
 - [ ] Set to `"mobile"` for phone/tablet mockups
 
 ✅ **Image Path:**
+
 - [ ] Starts with `/templates/`
 - [ ] Matches actual filename
 - [ ] PNG extension
 
 ✅ **Slot Dimensions:**
+
 - [ ] X and Y offsets are correct
 - [ ] Width and height match screen area
 - [ ] All values are positive integers
 
 ✅ **Border Radius:**
+
 - [ ] Set to 0 for square corners (browsers)
 - [ ] Measured accurately for rounded screens (phones)
 - [ ] Optional (can be omitted if 0)
@@ -302,17 +318,20 @@ export const templates: Template[] = [
 #### Testing Workflow
 
 **Step 1: Start Development Server**
+
 ```bash
 cd mockup-factory
 pnpm dev
 ```
 
 **Step 2: Navigate to Templates Page**
+
 ```
 Open: http://localhost:3000/templates
 ```
 
 **Step 3: Visual Verification**
+
 - [ ] Your template appears in the grid
 - [ ] Template thumbnail loads correctly
 - [ ] Type badge shows correct category (Web/Mobile)
@@ -323,18 +342,21 @@ Open: http://localhost:3000/templates
 Use these test images for verification:
 
 **Test Image 1: Solid Color**
+
 ```
 Create a solid red/green/blue rectangle matching your slot dimensions
 Purpose: Check if content fills screen area perfectly
 ```
 
 **Test Image 2: Grid Pattern**
+
 ```
 Create a grid/checkerboard pattern
 Purpose: Verify alignment and detect any skewing
 ```
 
 **Test Image 3: Text/Numbers**
+
 ```
 Add corner numbers (1, 2, 3, 4) in each corner
 Purpose: Check if corners align and radius is correct
@@ -344,17 +366,18 @@ Purpose: Check if corners align and radius is correct
 
 Common issues and fixes:
 
-| Issue | Cause | Solution |
-|-------|-------|----------|
-| Content overflows left edge | `x` too small | Increase `x` value |
-| Content overflows top edge | `y` too small | Increase `y` value |
-| Content doesn't reach edges | `width`/`height` too small | Increase dimensions |
-| Content spills outside screen | `width`/`height` too large | Decrease dimensions |
-| Corners appear square | `borderRadius` too small | Increase radius |
-| Corners too rounded | `borderRadius` too large | Decrease radius |
-| Content appears off-center | Asymmetric measurements | Re-measure all values |
+| Issue                         | Cause                      | Solution              |
+| ----------------------------- | -------------------------- | --------------------- |
+| Content overflows left edge   | `x` too small              | Increase `x` value    |
+| Content overflows top edge    | `y` too small              | Increase `y` value    |
+| Content doesn't reach edges   | `width`/`height` too small | Increase dimensions   |
+| Content spills outside screen | `width`/`height` too large | Decrease dimensions   |
+| Corners appear square         | `borderRadius` too small   | Increase radius       |
+| Corners too rounded           | `borderRadius` too large   | Decrease radius       |
+| Content appears off-center    | Asymmetric measurements    | Re-measure all values |
 
 **Step 6: Test with Real Content**
+
 - Upload an actual screenshot or design
 - Verify it looks professional and realistic
 - Check on different screen sizes
@@ -366,17 +389,18 @@ Common issues and fixes:
 
 ### Recommended Software
 
-| Tool | Platform | Best For | Free? |
-|------|----------|----------|-------|
-| **Figma** | Web, Desktop | Quick measurements, collaboration | ✅ Yes |
-| **Photoshop** | Desktop | Professional editing, precision | ❌ Paid |
-| **GIMP** | Desktop | Free alternative to Photoshop | ✅ Yes |
-| **Pixelmator Pro** | macOS | Mac-native design tool | ❌ Paid |
-| **Photopea** | Web | Free browser-based Photoshop | ✅ Yes |
+| Tool               | Platform     | Best For                          | Free?   |
+| ------------------ | ------------ | --------------------------------- | ------- |
+| **Figma**          | Web, Desktop | Quick measurements, collaboration | ✅ Yes  |
+| **Photoshop**      | Desktop      | Professional editing, precision   | ❌ Paid |
+| **GIMP**           | Desktop      | Free alternative to Photoshop     | ✅ Yes  |
+| **Pixelmator Pro** | macOS        | Mac-native design tool            | ❌ Paid |
+| **Photopea**       | Web          | Free browser-based Photoshop      | ✅ Yes  |
 
 ### Online Measurement Tools
 
 **Photopea** (Free Photoshop alternative):
+
 ```
 https://www.photopea.com/
 - Open PNG file
@@ -385,6 +409,7 @@ https://www.photopea.com/
 ```
 
 **Figma** (Free for individuals):
+
 ```
 https://figma.com/
 - Import PNG
@@ -400,23 +425,24 @@ https://figma.com/
 
 #### Desktop Monitors
 
-| Device | Resolution | Typical Slot | Border Radius |
-|--------|------------|--------------|---------------|
-| Full HD Monitor | 1920 × 1080 | 1920 × 1010 | 0-5px |
-| iMac 24" (M1) | 4480 × 2520 | 4480 × 2450 | 10px |
-| iMac 27" (5K) | 5120 × 2880 | 5120 × 2810 | 8px |
-| MacBook Pro 14" | 3024 × 1964 | 3024 × 1890 | 12px |
-| MacBook Pro 16" | 3456 × 2234 | 3456 × 2160 | 12px |
+| Device          | Resolution  | Typical Slot | Border Radius |
+| --------------- | ----------- | ------------ | ------------- |
+| Full HD Monitor | 1920 × 1080 | 1920 × 1010  | 0-5px         |
+| iMac 24" (M1)   | 4480 × 2520 | 4480 × 2450  | 10px          |
+| iMac 27" (5K)   | 5120 × 2880 | 5120 × 2810  | 8px           |
+| MacBook Pro 14" | 3024 × 1964 | 3024 × 1890  | 12px          |
+| MacBook Pro 16" | 3456 × 2234 | 3456 × 2160  | 12px          |
 
 #### Browser Windows
 
-| Browser Type | Typical Slot | Header Height | Border Radius |
-|--------------|--------------|---------------|---------------|
-| Chrome/Edge | 1920 × 1008 | 72px | 0px |
-| Safari (macOS) | 1920 × 1000 | 80px | 8px |
-| Firefox | 1920 × 1010 | 70px | 0px |
+| Browser Type   | Typical Slot | Header Height | Border Radius |
+| -------------- | ------------ | ------------- | ------------- |
+| Chrome/Edge    | 1920 × 1008  | 72px          | 0px           |
+| Safari (macOS) | 1920 × 1000  | 80px          | 8px           |
+| Firefox        | 1920 × 1010  | 70px          | 0px           |
 
 **Frame Offsets:**
+
 - **X:** Usually 0 (browsers start at left edge)
 - **Y:** Header height (typically 70-80px)
 
@@ -424,30 +450,30 @@ https://figma.com/
 
 #### iPhone Models
 
-| Device | Screen Resolution | Frame Offset | Border Radius |
-|--------|-------------------|--------------|---------------|
-| iPhone 14 Pro Max | 430 × 932 | ~26px | 55px |
-| iPhone 14 Pro | 390 × 844 | ~26px | 47px |
-| iPhone 14 | 390 × 844 | ~24px | 47px |
-| iPhone SE (3rd) | 375 × 667 | ~20px | 10px |
-| iPhone 13 Mini | 375 × 812 | ~24px | 44px |
+| Device            | Screen Resolution | Frame Offset | Border Radius |
+| ----------------- | ----------------- | ------------ | ------------- |
+| iPhone 14 Pro Max | 430 × 932         | ~26px        | 55px          |
+| iPhone 14 Pro     | 390 × 844         | ~26px        | 47px          |
+| iPhone 14         | 390 × 844         | ~24px        | 47px          |
+| iPhone SE (3rd)   | 375 × 667         | ~20px        | 10px          |
+| iPhone 13 Mini    | 375 × 812         | ~24px        | 44px          |
 
 #### Android Models
 
-| Device | Screen Resolution | Frame Offset | Border Radius |
-|--------|-------------------|--------------|---------------|
-| Pixel 7 Pro | 412 × 915 | ~4px | 36px |
-| Samsung S23 Ultra | 360 × 780 | ~8px | 42px |
-| OnePlus 11 | 412 × 892 | ~6px | 32px |
-| Xiaomi 13 | 393 × 851 | ~5px | 38px |
+| Device            | Screen Resolution | Frame Offset | Border Radius |
+| ----------------- | ----------------- | ------------ | ------------- |
+| Pixel 7 Pro       | 412 × 915         | ~4px         | 36px          |
+| Samsung S23 Ultra | 360 × 780         | ~8px         | 42px          |
+| OnePlus 11        | 412 × 892         | ~6px         | 32px          |
+| Xiaomi 13         | 393 × 851         | ~5px         | 38px          |
 
 #### Tablets
 
-| Device | Screen Resolution | Frame Offset | Border Radius |
-|--------|-------------------|--------------|---------------|
-| iPad Pro 12.9" | 2048 × 2732 | ~32px | 18px |
-| iPad Air | 1640 × 2360 | ~28px | 16px |
-| iPad Mini | 1488 × 2266 | ~26px | 14px |
+| Device         | Screen Resolution | Frame Offset | Border Radius |
+| -------------- | ----------------- | ------------ | ------------- |
+| iPad Pro 12.9" | 2048 × 2732       | ~32px        | 18px          |
+| iPad Air       | 1640 × 2360       | ~28px        | 16px          |
+| iPad Mini      | 1488 × 2266       | ~26px        | 14px          |
 
 ---
 
@@ -456,26 +482,30 @@ https://figma.com/
 ### Issue: Template Not Appearing
 
 **Possible Causes:**
+
 1. PNG file not in `public/templates/` folder
 2. Typo in `imagePath`
 3. Template not added to `templates` array
 
 **Solution:**
+
 ```typescript
 // Check these:
-imagePath: "/templates/web-imac-silver.png"  // ✅ Correct
-imagePath: "templates/web-imac-silver.png"   // ❌ Missing leading slash
-imagePath: "/template/web-imac-silver.png"   // ❌ Wrong folder name
+imagePath: "/templates/web-imac-silver.png"; // ✅ Correct
+imagePath: "templates/web-imac-silver.png"; // ❌ Missing leading slash
+imagePath: "/template/web-imac-silver.png"; // ❌ Wrong folder name
 ```
 
 ### Issue: Content Misaligned
 
 **Possible Causes:**
+
 1. Incorrect x/y offset measurements
 2. PNG was resized after measuring
 3. Wrong width/height values
 
 **Solution:**
+
 ```typescript
 // Re-measure carefully
 // Use exact pixel coordinates from design tool
@@ -488,11 +518,13 @@ slot: { x: 146, y: 135, width: 2560, height: 1440 }
 ### Issue: Content Overflows or Doesn't Fill Screen
 
 **Possible Causes:**
+
 1. Width/height too large (overflow)
 2. Width/height too small (doesn't fill)
 3. PNG aspect ratio doesn't match slot
 
 **Solution:**
+
 ```typescript
 // Test with incremental adjustments
 // Original:
@@ -508,16 +540,18 @@ slot: { x: 100, y: 100, width: 1940, height: 1100 }
 ### Issue: Corners Not Matching
 
 **Possible Causes:**
+
 1. Wrong `borderRadius` value
 2. Mockup has variable corner radii
 3. Canvas rendering issue
 
 **Solution:**
+
 ```typescript
 // Try different values:
-borderRadius: 0   // Square corners
-borderRadius: 10  // Slightly rounded
-borderRadius: 47  // iPhone-style rounded
+borderRadius: 0; // Square corners
+borderRadius: 10; // Slightly rounded
+borderRadius: 47; // iPhone-style rounded
 
 // For iOS devices, typical values:
 // iPhone: 40-55px
@@ -530,11 +564,13 @@ borderRadius: 47  // iPhone-style rounded
 ### Issue: Low Quality Output
 
 **Possible Causes:**
+
 1. Source PNG too small
 2. Browser downscaling
 3. User uploaded low-res image
 
 **Solution:**
+
 ```typescript
 // Ensure your template PNG is high resolution
 // Recommended minimum sizes:
@@ -556,7 +592,7 @@ borderRadius: 47  // iPhone-style rounded
   label: "Browser Light",
   type: "web",
   imagePath: "/templates/web-browser-light.png",
-  slot: { 
+  slot: {
     x: 0,        // Browser starts at left edge
     y: 72,       // 72px header with tabs and address bar
     width: 1920, // Full HD width
@@ -567,6 +603,7 @@ borderRadius: 47  // iPhone-style rounded
 ```
 
 **Measurements:**
+
 - PNG size: 1920 × 1080px
 - Header bar: 72px tall
 - No side borders (x = 0)
@@ -582,7 +619,7 @@ borderRadius: 47  // iPhone-style rounded
   label: "iPhone 14 Pro",
   type: "mobile",
   imagePath: "/templates/mobile-iphone-14-pro.png",
-  slot: { 
+  slot: {
     x: 26,       // 26px bezel on left
     y: 26,       // 26px bezel on top
     width: 390,  // Native screen width
@@ -593,6 +630,7 @@ borderRadius: 47  // iPhone-style rounded
 ```
 
 **Measurements:**
+
 - PNG size: 442 × 896px (390 + 26*2, 844 + 26*2)
 - Uniform bezel: 26px all around
 - Rounded corners: 47px radius
@@ -608,7 +646,7 @@ borderRadius: 47  // iPhone-style rounded
   label: "iMac 24\" Silver",
   type: "web",
   imagePath: "/templates/web-imac-24-silver.png",
-  slot: { 
+  slot: {
     x: 145,      // Left bezel + chin offset
     y: 135,      // Top bezel
     width: 4480, // 4.5K Retina display width
@@ -619,6 +657,7 @@ borderRadius: 47  // iPhone-style rounded
 ```
 
 **Measurements:**
+
 - PNG size: ~4770 × 3000px (includes chin and stand)
 - Non-uniform bezels (chin is larger)
 - High-resolution display
@@ -634,7 +673,7 @@ borderRadius: 47  // iPhone-style rounded
   label: "Pixel Tablet",
   type: "mobile",
   imagePath: "/templates/mobile-pixel-tablet.png",
-  slot: { 
+  slot: {
     x: 48,       // Larger bezel for tablet
     y: 48,       // Symmetrical on all sides
     width: 1600, // 10.95" display
@@ -645,6 +684,7 @@ borderRadius: 47  // iPhone-style rounded
 ```
 
 **Measurements:**
+
 - PNG size: 1696 × 2656px
 - Larger bezels than phones
 - 16:10 aspect ratio
@@ -695,19 +735,22 @@ Once your template is tested and working:
 
 ### Pull Request Template
 
-```markdown
+````markdown
 ## New Template: [Device Name]
 
 ### Description
+
 - **Device:** iMac 24" (M1)
 - **Type:** Web
 - **Resolution:** 4480 × 2520
 - **Special notes:** Includes device chin and stand
 
 ### Screenshots
+
 [Attach mockup examples]
 
 ### Checklist
+
 - [ ] PNG file added to `public/templates/`
 - [ ] Configuration added to `lib/templates.ts`
 - [ ] Tested with multiple images
@@ -717,10 +760,13 @@ Once your template is tested and working:
 - [ ] Works on mobile and desktop
 
 ### Measurements
+
 ```typescript
 slot: { x: 145, y: 135, width: 4480, height: 2520 }
 borderRadius: 10
 ```
+````
+
 ```
 
 ---
@@ -759,3 +805,4 @@ borderRadius: 10
 <p align="center">
   Made with ❤️ by the Mockup Factory community
 </p>
+```
