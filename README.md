@@ -14,6 +14,7 @@
   <a href="#getting-started">Getting Started</a> •
   <a href="#how-it-works">How It Works</a> •
   <a href="#templates">Templates</a> •
+  <a href="#adding-templates">Adding Templates</a> •
   <a href="#contributing">Contributing</a> •
   <a href="#license">License</a>
 </p>
@@ -191,6 +192,39 @@ For best results, use images that match the template slot dimensions:
 
 - **Web Mockups:** `1920 × 1008 px` (aspect ratio ≈ 1.9:1)
 - **Mobile Mockups:** `390 × 844 px` (iPhone) or `424 × 915 px` (Android)
+
+---
+
+## 🎯 Adding Templates
+
+Want to add a new mockup template? We've created a comprehensive guide to walk you through the process!
+
+**📖 Read the full guide:** [TEMPLATE_GUIDE.md](TEMPLATE_GUIDE.md)
+
+### Quick Start
+
+1. **Prepare** - Create or find a high-quality device mockup PNG with transparent background
+2. **Measure** - Use Photoshop/Figma to measure the screen area coordinates
+3. **Configure** - Add template configuration to `lib/templates.ts`
+4. **Test** - Verify your template works with various images
+5. **Submit** - Open a pull request with your new template
+
+### Example Configuration
+
+```typescript
+{
+  id: "web-imac-silver",
+  label: "iMac Silver",
+  type: "web",
+  imagePath: "/templates/web-imac-silver.png",
+  slot: { x: 145, y: 135, width: 2560, height: 1440 },
+  borderRadius: 8,
+}
+```
+
+For detailed instructions, measurements, troubleshooting, and examples, see the **[Template Creation Guide](TEMPLATE_GUIDE.md)**.
+
+---
 
 ### How to Calculate Template Dimensions
 
